@@ -1,0 +1,49 @@
+[package]
+name = "kathashelf"
+version = "0.1.0"
+edition = "2021"
+description = "A local-first desktop book tracking app built with eframe/egui and SQLite"
+authors = ["KathaShelf"]
+
+[dependencies]
+# Pure-Rust GUI (uses winit + glow/wgpu under the hood; no web stack required)
+eframe = "0.37"
+egui = "0.37"
+# SQLite with a bundled copy of SQLite (no system SQLite needed; still needs a C compiler at build time)
+rusqlite = { version = "0.43", features = ["bundled"] }
+# Cross-platform OS app-data directory resolution
+directories = "6"
+# Decode cached cover images into textures. WebP is needed for Goodreads /
+# Google Books thumbnails, which are not always served as JPEG or PNG.
+image = { version = "0.25", features = ["jpeg", "png", "webp"] }
+# Blocking HTTP client (rustls only). Search and cover downloads run on
+# background std::threads with mpsc channels, so the egui UI thread never blocks.
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+# HTML parsing for the Goodreads search fallback (Malayalam / Indian publishers).
+scraper = "0.24"
+# Native "choose a file / folder" dialog (used by cover picker and folder scanner)
+rfd = "0.18"
+# VLC-style local library scanner
+walkdir = "2"
+epub = "2"
+lopdf = "0.38"
+open = "5"
+# Only used for the "Today" button when setting date_finished
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+# API JSON + URL encoding
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+urlencoding = "2"
+# Calendar date picker for the "Date finished" field
+egui_extras = { version = "0.37", default-features = false, features = ["datepicker"] }
+jiff = "0.2"
+# Read a cover image directly from the system clipboard
+arboard = "3"
+
+[profile.release]
+# Favour a small, cache-friendly binary for fast cold starts on Windows.
+opt-level = "s"
+lto = "thin"
+codegen-units = 1
+strip = "symbols"
+panic = "abort"
