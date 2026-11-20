@@ -94,9 +94,13 @@ Prebuilt binaries are available on the [Releases](../../releases) page.
 
 ## Screenshots
 
-| Library shelves | Discover charts | Reader profile |
+| Library shelves | All Books grid | Book detail & online info |
 |---|---|---|
-| ![Shelves](docs/screenshots/library.png) | ![Discover](docs/screenshots/discover.png) | ![Profile](docs/screenshots/profile.png) |
+| ![Shelves](docs/screenshots/library.png) | ![All Books](docs/screenshots/all-books.png) | ![Book detail](docs/screenshots/book-detail.png) |
+
+| Discover charts | Reader profile |
+|---|---|
+| ![Discover](docs/screenshots/discover.png) | ![Profile](docs/screenshots/profile.png) |
 
 ---
 
